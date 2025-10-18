@@ -1,8 +1,52 @@
 ---
 title: "CSS Functions"
 ---
+import { Aside, Card } from '@astrojs/starlight/components';
+import ColorContrast from './color-contrast.astro';
 import functions from './functions.css?raw';
 
 <style is:inline set:html={functions}></style>
 
-<p class="foo">This text is red using a CSS function.</p>
+<Aside type="caution">
+  CSS functions are currently being standardized and currently only work in Chromium 141+.
+</Aside>
+
+## Animation
+
+## Background
+<Card
+  title="<code style='font-size: var(--sl-text-h4);'>--gradient</code>"
+>
+  <div style="width: 100%; height: 100px; background: --gradient(220deg, red, blue);"></div>
+  ```css ins="--gradient(220deg, red, blue)"
+  div {
+    background: --gradient(220deg, red, blue);
+  }
+  ```
+</Card>
+
+<Card
+  title="<code style='font-size: var(--sl-text-h4);'>--line-pattern</code>"
+>
+  <div style="width: 100%; height: 100px; background: --line-pattern();"></div>
+  ```css ins="--line-pattern()"
+  div {
+    background: --line-pattern();
+  }
+  ```
+</Card>
+
+## Color
+<ColorContrast>
+  ```css ins="--color-contrast(var(--bg-color))"
+  div {
+    --bg-color: red;
+    background-color: var(--bg-color);
+    color: --color-contrast(var(--bg-color));
+  }
+  ```
+</ColorContrast>
+
+## Design Tokens
+
+## Theming

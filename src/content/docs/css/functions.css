@@ -31,9 +31,3 @@
     repeat
     center/var(--bg-size);
 }
-
-.foo {
-  background: --line-pattern();
-  width: 100px;
-  height: 100px;
-}
