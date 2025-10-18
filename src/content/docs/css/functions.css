@@ -1,0 +1,39 @@
+@function --light-dark(--light, --dark) {
+  result: if(color-scheme(dark): var(--dark); else: var(--light));
+}
+
+@function --contrast-color(--fill) {
+  --luminance: clamp(0, (l / var(--l-threshold, 0.623) - 1) * -infinity, 1);
+  result: oklch(from var(--fill) var(--luminance) 0 h / 1);
+}
+
+@function --gradient(--angle: 220deg, --start, --end, --origin: padding-box) {
+  result: var(--origin) linear-gradient(in oklch var(--angle), var(--start), var(--end));
+}
+
+@function --line-pattern(
+  --angle: 45deg,
+  --from-color: currentColor,
+  --to-color: var(--from-color),
+  --stroke-width: 1px,
+  --bg-size: 10px 10px,
+  --origin: padding-box
+  ) {
+  result:
+    var(--origin)
+    repeating-linear-gradient(
+      in oklch var(--angle),
+      var(--from-color) 0,
+      var(--to-color) var(--stroke-width),
+      transparent 0,
+      transparent 50%
+    )
+    repeat
+    center/var(--bg-size);
+}
+
+.foo {
+  background: --line-pattern();
+  width: 100px;
+  height: 100px;
+}
