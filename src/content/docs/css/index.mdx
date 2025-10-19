@@ -1,0 +1,21 @@
+---
+title: CSS Experiments
+sidebar:
+  hidden: true
+---
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { Debug } from 'astro:components';
+import { getCollection, getEntry } from 'astro:content';
+
+<CardGrid>
+  {(await getCollection('docs'))
+    .filter(entry => entry.id.startsWith('css/'))
+    .map(entry => (
+      <LinkCard 
+        title={entry.data.title}
+        href={`/${entry.id}/`}
+        description={entry.data.description}
+        icon="code-block"
+      />
+    ))}
+</CardGrid>
