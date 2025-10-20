@@ -18,7 +18,7 @@
   --stroke-width: 1px,
   --bg-size: 10px 10px,
   --origin: padding-box
-  ) {
+) {
   result:
     var(--origin)
     repeating-linear-gradient(

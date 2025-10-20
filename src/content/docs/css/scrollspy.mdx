@@ -1,0 +1,75 @@
+---
+title: CSS Scroll-Spy
+sidebar:
+  label: Scroll-Spy
+  badge:
+    text: Experimental
+    variant: caution
+---
+import { Aside, Card, Tabs, TabItem } from '@astrojs/starlight/components';
+import scrollspy from './scrollspy.css?raw';
+
+<style is:inline set:html={scrollspy}></style>
+
+<Aside type="caution">
+  Some of these demos rely on <code>scroll-target-group</code>, which is currently only shipped in Chromium 140+.
+</Aside>
+
+## Scroll Target Group
+
+This Demo uses the new `scroll-target-group` property and anchor links to create a scroll-spy effect using only CSS. As the user scrolls through the content, the corresponding link in the table of contents is highlighted automatically.
+<Tabs>
+  <TabItem label="Example">
+    <section class="demo-1" aria-label="A Basic demo of CSS-only scroll-spy">
+      <ul class="toc">
+        <li><a href="#one">Section One</a></li>
+        <li><a href="#two">Section Two</a></li>
+        <li><a href="#three">Section Three</a></li>
+      </ul>
+      <div class="content">
+        <div id="one">
+          <h2>Section One</h2>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe molestias labore a doloremque quis? Fuga porro delectus quo exercitationem fugit quidem minima dolor, quasi similique error. Perspiciatis incidunt animi voluptate.</p>
+          <p>Voluptatum alias impedit dolor rem consequatur, ab nihil expedita veniam sunt repellat! Doloribus ab expedita illum laudantium? Ipsum, deleniti quasi. Eum minima nesciunt nam, ipsam consectetur beatae id quia ad?</p>
+          <p>Odio incidunt ratione, blanditiis laudantium, eveniet repudiandae minus animi accusamus ducimus, asperiores similique? Aperiam ipsa accusantium beatae totam vitae. Accusamus ullam asperiores cumque officia sequi error at ducimus! Nemo, unde.</p>
+        </div>
+        <div id="two">
+          <h2>Section Two</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita quibusdam itaque cumque? Mollitia, tempore. At laudantium quod, asperiores quae eius unde autem, soluta eos sapiente ducimus consequuntur ex! Maiores, voluptate.</p>
+          <p>Quam saepe voluptate dolores quisquam? Cumque officiis, incidunt cum perferendis quam nobis error consequuntur deleniti in placeat dignissimos inventore ipsam? Aut officia sequi cupiditate amet dignissimos ipsam et adipisci tempore?</p>
+          <p>Exercitationem voluptatum vero beatae rerum. Quam ducimus libero dolorum nemo molestiae repudiandae nesciunt tempore vero, nostrum deleniti possimus labore aspernatur suscipit id cumque voluptate commodi delectus fugiat? Ut, obcaecati cum?</p>
+          <p>Odio incidunt ratione, blanditiis laudantium, eveniet repudiandae minus animi accusamus ducimus, asperiores similique? Aperiam ipsa accusantium beatae totam vitae. Accusamus ullam asperiores cumque officia sequi error at ducimus! Nemo, unde.</p>
+        </div>
+        <div id="three">
+          <h2>Section Three</h2>
+          <p>Voluptatum alias impedit dolor rem consequatur, ab nihil expedita veniam sunt repellat! Doloribus ab expedita illum laudantium? Ipsum, deleniti quasi. Eum minima nesciunt nam, ipsam consectetur beatae id quia ad?</p>
+          <p>Eaque ut placeat eligendi ipsam sunt minus et nesciunt, velit nulla! Consequatur cupiditate tempore voluptas dolor quam repellat, impedit expedita veniam architecto officiis earum dicta aspernatur magni hic, cumque excepturi.</p>
+          <p>Quam saepe voluptate dolores quisquam? Cumque officiis, incidunt cum perferendis quam nobis error consequuntur deleniti in placeat dignissimos inventore ipsam? Aut officia sequi cupiditate amet dignissimos ipsam et adipisci tempore?</p>
+          <p>Exercitationem voluptatum vero beatae rerum. Quam ducimus libero dolorum nemo molestiae repudiandae nesciunt tempore vero, nostrum deleniti possimus labore aspernatur suscipit id cumque voluptate commodi delectus fugiat? Ut, obcaecati cum?</p>
+        </div>
+      </div>
+    </section>
+  </TabItem>
+  <TabItem label="Code">
+    ```css "scroll-target-group: auto;"
+    .toc {
+      scroll-target-group: auto;
+
+      a:target-current {
+        color: red;
+      }
+    }
+    ```
+    ```html
+    <ul>
+      <li><a href="#one">Section One</a></li>
+      <li><a href="#two">Section Two</a></li>
+      <li><a href="#three">Section Three</a></li>
+    </ul>
+    <div id="one">...</div>
+    <div id="two">...</div>
+    <div id="three">...</div>
+    ```
+  </TabItem>
+</Tabs>
+

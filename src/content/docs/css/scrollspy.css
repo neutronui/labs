@@ -1,0 +1,25 @@
+.demo-1 {
+  a:target-current {
+    color: red;
+  }
+}
+
+.toc {
+  display: flex;
+  scroll-target-group: auto;
+  flex-flow: column;
+  padding-block: 16px;
+  list-style: none;
+  padding-inline: 0;
+}
+
+.content {
+  max-height: 400px;
+  overflow: auto;
+  scroll-behavior: smooth;
+  
+  > div {
+    scroll-snap-align: start;
+  }
+}
+

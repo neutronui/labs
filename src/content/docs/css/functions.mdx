@@ -6,7 +6,7 @@ sidebar:
     text: Experimental
     variant: caution
 ---
-import { Aside, Card } from '@astrojs/starlight/components';
+import { Aside, Card, Tabs, TabItem } from '@astrojs/starlight/components';
 import ColorContrast from './color-contrast.astro';
 import functions from './functions.css?raw';
 
@@ -16,42 +16,129 @@ import functions from './functions.css?raw';
   CSS functions are currently being standardized and currently only work in Chromium 141+.
 </Aside>
 
-## Animation
-
 ## Background
 <Card
   title="<code style='font-size: var(--sl-text-h4);'>--gradient</code>"
 >
   <div style="width: 100%; height: 100px; background: --gradient(220deg, red, blue);"></div>
-  ```css ins="--gradient(220deg, red, blue)"
-  div {
-    background: --gradient(220deg, red, blue);
-  }
-  ```
+  <Tabs>
+    <TabItem label="Example">
+      ```css ins="--gradient(220deg, red, blue)"
+      div {
+        background: --gradient(220deg, red, blue);
+      }
+      ```
+    </TabItem>
+    <TabItem label="Code">
+      ```css
+      @function --gradient(
+        --angle,
+        --start,
+        --end,
+        --origin: padding-box
+      ) {
+        result: var(--origin) linear-gradient(
+            in oklch var(--angle),
+            var(--start),
+            var(--end)
+          );
+      }
+      ```
+    </TabItem>
+  </Tabs>
 </Card>
 
 <Card
   title="<code style='font-size: var(--sl-text-h4);'>--line-pattern</code>"
 >
-  <div style="width: 100%; height: 100px; background: --line-pattern();"></div>
-  ```css ins="--line-pattern()"
-  div {
-    background: --line-pattern();
-  }
-  ```
+  <Tabs>
+    <div style="width: 100%; height: 100px; background: --line-pattern();"></div>
+    <TabItem label="Example">
+      ```css ins="--line-pattern()"
+      div {
+        background: --line-pattern();
+      }
+      ```
+    </TabItem>
+    <TabItem label="Code">
+      ```css
+      @function --line-pattern(
+        --angle: 45deg,
+        --from-color: currentColor,
+        --to-color: var(--from-color),
+        --stroke-width: 1px,
+        --bg-size: 10px 10px,
+        --origin: padding-box
+      ) {
+        result:
+          var(--origin)
+          repeating-linear-gradient(
+            in oklch var(--angle),
+            var(--from-color) 0,
+            var(--to-color) var(--stroke-width),
+            transparent 0,
+            transparent 50%
+          )
+          repeat
+          center/var(--bg-size);
+      }
+      ```
+    </TabItem>
+  </Tabs>
 </Card>
 
 ## Color
 <ColorContrast>
-  ```css ins="--color-contrast(var(--bg-color))"
-  div {
-    --bg-color: red;
-    background-color: var(--bg-color);
-    color: --color-contrast(var(--bg-color));
-  }
-  ```
+  <Fragment slot="example">
+    ```css ins="--color-contrast(var(--bg-color))"
+    div {
+      --bg-color: red;
+      background-color: var(--bg-color);
+      color: --color-contrast(var(--bg-color));
+    }
+    ```
+  </Fragment>
+  <Fragment slot="code">
+    ```css
+    @function --contrast-color(--fill) {
+      --l: clamp(0, (l / var(--l-threshold, 0.623) - 1) * -infinity, 1);
+      result: oklch(from var(--fill) var(--l) 0 h / 1);
+    }
+    ```
+  </Fragment>
 </ColorContrast>
 
-## Design Tokens
-
 ## Theming
+<Card
+  title="<code style='font-size: var(--sl-text-h4);'>--line-pattern</code>"
+>
+  <Aside type="note">
+    The <code>color-scheme()</code> CSS function that this example relies on is currently not supported by any browser.
+  </Aside>
+  <div style="width: 100%; height: 100px; color-scheme: var(--scheme, light);">
+    <p
+      style="font-size: --light-dark(16px, 18px); font-weight: --light-dark(500, 300); color: --light-dark(black, white); text-decoration: --light-dark(underline, none);"
+    >
+      Toggle the color scheme in the navigation bar
+    </p>
+  </div>
+  <Tabs>
+    <TabItem label="Example">
+      ```css ins="--light-dark(500, 300)"
+      div {
+        font-weight: --light-dark(500, 300);
+      }
+      ```
+    </TabItem>
+    <TabItem label="Code">
+      ```css
+      @function --light-dark(--light, --dark) {
+        result: if(
+          color-scheme(dark): var(--dark);
+          else: var(--light)
+        );
+      }
+      ```
+    </TabItem>
+  </Tabs>
+</Card>

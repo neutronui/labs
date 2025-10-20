@@ -1,5 +1,5 @@
 ---
-import { Card } from '@astrojs/starlight/components';
+import { Card, TabItem, Tabs } from '@astrojs/starlight/components';
 ---
 
 <Card
@@ -9,7 +9,14 @@ import { Card } from '@astrojs/starlight/components';
     <input type="color" data-id="color-example-picker" value="#004a23" />
     I have contrast!
   </div>
-  <slot />
+  <Tabs>
+    <TabItem label="Example">
+      <slot name="example" />
+    </TabItem>
+    <TabItem label="Code">
+      <slot name="code" />
+    </TabItem>
+  </Tabs>
 </Card>
 
 <style>
